@@ -33,7 +33,7 @@ app.use(
     credentials: true,
     origin: [
       "http://localhost:3000",
-      "https://kambaz-next-js-git-a6-aparnaa-rajans-projects.vercel.app",
+      "webdev-fall25-quizzes-project-git-main-aparnaa-rajans-projects.vercel.app",
       process.env.CLIENT_URL,
       /\.vercel\.app$/  
     ].filter(Boolean),
