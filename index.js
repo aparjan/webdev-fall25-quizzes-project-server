@@ -10,18 +10,18 @@ import ModuleRoutes from './Kambaz/Modules/routes.js';
 import AssignmentRoutes from './Kambaz/Assignments/routes.js';
 import EnrollmentRoutes from './Kambaz/Enrollments/routes.js';
 import QuizRoutes from "./Kambaz/Quizzes/routes.js";
+import QuizAttemptRoutes from "./Kambaz/QuizAttempts/routes.js";
 
-// Use DATABASE_CONNECTION_STRING for production, fallback to local for development
 const CONNECTION_STRING = process.env.DATABASE_CONNECTION_STRING || "mongodb://127.0.0.1:27017/kambaz";
 
 mongoose
   .connect(CONNECTION_STRING)
   .then(() => {
-    console.log("✅ Connected to MongoDB successfully!");
-    console.log("📍 Database:", CONNECTION_STRING.includes("mongodb.net") ? "MongoDB Atlas (Cloud)" : "Local MongoDB");
+    console.log("Connected to MongoDB successfully!");
+    console.log("Database:", CONNECTION_STRING.includes("mongodb.net") ? "MongoDB Atlas (Cloud)" : "Local MongoDB");
   })
   .catch((err) => {
-    console.error("❌ MongoDB connection error:", err);
+    console.error("MongoDB connection error:", err);
   });
 
 const app = express();
@@ -69,9 +69,10 @@ ModuleRoutes(app);
 AssignmentRoutes(app);
 EnrollmentRoutes(app);
 QuizRoutes(app);
+QuizAttemptRoutes(app);
 
 app.listen(process.env.PORT || 4000, () => {
-    console.log('🚀 Server running on port', process.env.PORT || 4000);
-    console.log('🌍 SERVER_ENV:', process.env.SERVER_ENV);
-    console.log('🔗 CLIENT_URL:', process.env.CLIENT_URL);
+    console.log('Server running on port', process.env.PORT || 4000);
+    console.log('SERVER_ENV:', process.env.SERVER_ENV);
+    console.log('CLIENT_URL:', process.env.CLIENT_URL);
 });
