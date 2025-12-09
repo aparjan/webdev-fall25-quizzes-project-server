@@ -11,6 +11,17 @@ const questionSchema = new mongoose.Schema({
   points: { type: Number, default: 1 },
   choices: [String],
   correctAnswer: String,
+  correctAnswers: [String], // For fill-in-blank with multiple possible answers
+});
+
+const attemptSchema = new mongoose.Schema({
+  _id: String,
+  user: String,
+  quiz: String,
+  answers: mongoose.Schema.Types.Mixed, // Object with questionId: answer
+  score: Number,
+  attemptNumber: Number,
+  submittedAt: { type: Date, default: Date.now },
 });
 
 const quizSchema = new mongoose.Schema(
@@ -32,6 +43,7 @@ const quizSchema = new mongoose.Schema(
     shuffleAnswers: { type: Boolean, default: true },
     timeLimit: { type: Number, default: 20 },
     multipleAttempts: { type: Boolean, default: false },
+    allowedAttempts: { type: Number, default: 1 },
     showCorrectAnswers: { type: Boolean, default: false },
     accessCode: String,
     oneQuestionAtATime: { type: Boolean, default: true },
@@ -48,4 +60,5 @@ const quizSchema = new mongoose.Schema(
   }
 );
 
+export { attemptSchema };
 export default quizSchema;
